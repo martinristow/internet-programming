@@ -1,0 +1,322 @@
+Logika za eCommerce stranata 
+
+
+1)
+Prvin kreirame eden folder pod ime app i toj folder
+ke gu sodrze celata logika, celata sustina na nasata 
+eCommerce stranata , znaci tuka se ona glavnoto ke se slucuva.
+
+Sega vo istiot toj folder kje kreirame uste eden folder 
+kade sto ke ni bidat zacuvani konfiguraciite na bazite
+pod ime config . Sega pravime uste eden folder vo folderot app
+pod imeto classes kade sto vo classes ke bidat smesteni site 
+klasi koj sto ke gi napravime , za user , admin , customer ,
+product , card , order i drugi.
+
+
+2)
+Vo ovoj proekt ke se pisuva CSS i JavaScript i ke ni treba 
+drug folder koj so ke se vika public i vo nego kreirame 
+uste dva novi folderi kade sto edniot folder e css a drugiot 
+e js i vnatre vo tie folderi se kreirani potrebnite fajlovi 
+za pisuvanje na css i javascript .
+Tie se public i ovie fajlovi se dostapni javno (za site),
+znaci sekad html i css koga se rendiraat na frontendot se 
+javno dostapni i zatoa se vikat public . 
+Sega tuka ke napravime uste eden folder koj ke ni sluzi za sliki
+i istiot ke se vika product_images
+
+
+3)
+Sega vo folderot eshop ke napravime uste eden folder 
+koj sto ke se vika admin i koj ke moze da dodava produkti i slicno
+
+
+4)
+Za da nekoj moze da kupe nekoj proizvod , istiot ke mora
+da se registrira i da se najavi , ili dokolku vekje e
+registriran samo da se najavi . Za toa e zaduzena klasata
+User koj sto kje upravuva so korisnikot , znaci vo klasata User
+nie ja pravime logikata za register i login , a pred toa da go
+napravime ke mora da se povrzeme na nasata baza za podatoci , a
+toa go imame napraveno vo config.php i tamu pisuvame kodot 
+za povrzuvanje so bazata , ama prvo mora u phpmyadmin da ja napravime
+nashata baza za podatoci.
+Otkako ke ja napravime bazata pod ime shop sega pisuvame kod vo config.php
+fajlot kade sto ke gi sodrzi potrebnite podatoci za povrzuvanje so bazata.
+
+5)
+Sega vo index ke ni se prikazuvaat proizvodite a ke napravime poseben link
+za registracija potocno ke imame druga php skripta za toa , i vo taa
+php skripta ni se sostoi od html kod kaj sto pravime opcija za registriranje
+i sega u bazata ke treba da kreirame baza za korisnicite so ke bidat registrirani 
+A vo taa tabela so ime users ke gi sodrzi userid, name , username, email , password , i edno
+pole(kolona) za admin koja so ke kazuva dali toj korisnik e admin ili ne e znaci poleto
+za admin ke bide isadmin i treba ni ona created za datumot znaci toa e 7 koloni.
+Sega koga popolnuvame podatoci u bazata za is_admin kaj Default treba da stavime
+As defined: i vrednost 0 znaci na pocetokot ke nema admin , a za da bide admin
+treba da ima vrednost 1 . 
+
+6)
+Sega sledno e da napravime logika za najavuvanjeto i gi gledame iminjata na inputite 
+za Full Name ni e name , itn za site drugi . Kodot go pisuvame u clasata User kade sto tuka
+kreirame edna funkcija create i vnatre so insert ke gi vnesuvame podatocite direktno u samata baza
+
+7)Sega od koga ke ja napravime php skriptata vo User , nisto nema da se sluci bidejki toj kod
+nikade ne e povikan , a za toa ke treba da napravime  potocno napiseme 
+nekoja logika i vo register.php  
+Vo index.php napravivme logika za da se ispecati taa poraka ako e uspesno napraven akaunt 
+
+
+8)
+Sega ke pravime login sistem , so znaci sega kreirame login.php
+ama sega kako sto gledame celo vreme go kopirame html kodot zatoa 
+ke napravime nov folder so ime inc(include) skrateno i vnatre u toj folder
+ke napravime header i footer , znaci kreirame header.php i footer.php
+Login sistemot go napravivme so html i boostrap 5 taka da sega ke pravime
+meni ama toa ke prodolzime utre ili drugiden
+
+9)
+Menitoto go napravivme vo header za sekade da se prikazuva 
+
+10)
+Sledno treba da go napravime login da bide funkcionalen , ke pisuvame
+logika za nego vo User.php . Pravime funkcija metoda koja ke se vika login, i 
+vo taa funkcija ke ni trebat username i password za da se najavime , sega 
+otkako ja napisavme logikata vo User.php sledno ke ni treba logika vo login.php
+
+11)
+Pisuvame logika vo login.php , prvin so require_one ja povikuvame User.php klasata 
+potoa gi prezemame informaciite koj sto korisnikot gi vnel pa kreirame nov objekt 
+gi zimame rezultatite vo result i proveruvame ako e razlicno od podatocite
+vo bazata togas ke ni ispecati greska , ako e ispravno togas ke ne odnese na index.php
+
+
+12)
+Sledno e koga se najjavime treba da imame dugme za odjavuvanje(logout) i card najverovatno .
+Sega i vo header.php ja povikuvame klasata User.php i ke moze da ja napiseme
+ostanata logika za logout i card.Nooo najprvo vo klasata User.php treba da napravime metoda
+koja ke proveruva dali userot e najaven , a taa metoda ke se vika is_logged() i otkako
+ke ja napiseme logikata tamu sledno e so pravime e odime vo header.php i tamu pisuvame drugata 
+logika a toa e shto sega kaj sto pisuva Register i login vo html kodot , ke go preseceme so php 
+kod kade sto ke proverime dali $user->is_logged i ako ne e najaven togas ke se ispecati istoto  
+a dokolku e najaven ke mu se ispecati My Orders i Logout .
+
+13)
+Sega ke ja napiseme logikata za logout , prvin kreirame fajl logout.php i vo nego ja pisuvame logikata 
+koja sto e dosta ednostavna samo sto ovde imame $user->logout() i ke treba nejze da ja kreirame vo User.php
+bidejki toa ni e funkcija i se prefrlame vo User.php i tamu go pisuvame kodot za taa funkcija
+treba da napravime unset na sesijata so user_id i toa e toa za logout 
+
+14)
+Drugo sto treba da napravime e vo login.php da proverime najprvin dali e najaven 
+poso ako e najaven nema potreba pak istiot kod da go prikazuvame tuku treba direkno da go nosi na index.php
+u pocetoko ke bide vaj kod if($user->is_logged()) ni e proverkata , istoto ke go turime i vo 
+register.php bidejki nema da mozes da se registriras koa vekje si najaven :D 
+DO TUKA LOGIN I REGISTRACIJA NI SE KOMPLET ZAVRSENI
+
+15)
+SLEDNO E VO INDEX DA GI LISTAME PROIZVODITE AMA TUKA KE PRODOLZIME POSLE KOA LOGIN I REGISTER KE GI 
+IZVEZBAM UBAVO , DA RAZBEREMO SO KAKO IDE , DA PROBAM SAM OD NOVO I TAKA
+
+
+16) 
+Najprvin treba da kreirame klasa za proizvodi i tabela u bazata za proizvodi  . Prvin ja kreirame 
+klasata so ime Product.php i vo nea class Product , sledno kreirame tabela u bazata znaci
+sea za product ke ni treba product_id , name , price , size(bidejki u vaj slucaj ke prodavame majci) ,
+created_at i slika od taa majca : toa znaci ni trebat 6 koloni vo tabelata i soodvetno gi popunuvame
+kolonite a imeto na tabelata ke ni se vika products ! 
+
+17)
+Sega ke odime na chatgpt da go prasame da ni dade nekoj dummy proizvodi za da gi dodademe vo tabelata 
+prasanjeto sto mu go postavivme e slednovo (Please write me SQL query to populate products table 
+(name ,	price	size ,	image )
+I need 6 real products to insert)
+
+18)
+Sega moze da gi izlistame nasite proizvodi ama prvo u klasata Product ni treba istiot konstruktor kako 
+u User.php klasata i tuka u clasata Product go pastirame , sledno 
+kreirame funkcija fetch_all kade sto gi zimame site podatoci od tabelata products i gi listame . I sega
+moze vo index.php moze da ja povikame taa funkcija no prvin ke treba u prviot php da napiseme 
+require_once 'app/classes/Product.php; sledno kreirame objekt od product i go izvrsuvame . 
+Potoa otvarame nov php i pisuvame eden foreach ciklus za da gi izlistame site proizvodi od bazata
+Voedno tuka ke napiseme i html kod so boostrap 5 za podobar izgled 
+
+19)
+Sega bidejki imame edno dugme napraveno vo ovaa linija kod
+ <a href="product.php?product_id=<?php echo $product['product_id'] ?>" class="btn btn-primary">View Product</a>
+ke treba da kreirame edna nova php , pod imeto product.php kako sto e navedeno vo a href vrskata
+kade sto ke gi ispisuvame informaciite za toj proizvod , pisuvame html kod 
+kod so php kod za da se ispecatat potrebnite informacii
+
+20)
+Sledno sea e koa ke klikneme na dugmeto Add to Cart da ni se dodade vo Card a za toa ke ni bide
+potrebno da go dademe vo samoto meni vo header.php , otkako ja dodavme tamu sega ke ni bide potrebno
+use edna php skripta koja ke se vika cart.php 
+
+21)
+Otkako ja kreiravme cart.php sledno e vo product napravime so request method kade sto
+ke go zememe product_id , potoa zimame go user_id za da znaeme koj user go dodal u korpata(logicno) bidejki
+ne moze samo taka da se dodade bez da znaeme koj go dodal voopsto toj proizvod , sekoj user si ima svoja korpa i zatoa negoviot id go zimame.
+Posle ide pravenje na object cart pa posle pravime cart->add_to_cart(product_id , user_id);
+tuka product_id oznacuva koj proizvod go dadavame , user_id oznacuva koj user go dodal toj proizvod i posle toa
+go redirektuvame(prakjame) na cart.php
+E sega ni treba clasata Cart i metodata add_to_cart i voedno gi kreirame niv kade sto standard 
+si go dodavame konstruktorot za povrzuvanje so bazata . 
+
+22)
+Sea pred da ja napiseme logikata za add_to_cart potrebno ni e tabela u bazata koja ke ni se vika cart i ke ni bidat
+potrebni podatoci cart_id , user_id , product_id za da znaeme koj user go napravil i koj proizvod go stavil tamu , i duri
+sega kje mozeme da go pisuvame kodot za add_to_cart kodot , znaci nogu e ednostavno
+vo funkcijata add_to_cart. 
+
+23)
+Odime vo cart.php kade sto ke gi ucitame barem nesto , da ne zabravime da dodadime
+require_once so klasata Cart.php vo product.php . Sega otkako ni raboti ova so dodavanjeto u bazata
+mozeme da gi ispecatime podatocite vo cart.php. No najvazno sea treba da proverime dali korisnikot e 
+logiran ili ne , bidejki ako ne e najaven ne smee nikako da pristapi do cart .
+
+24)
+Proverka za dali e najaven za prikazuvanje na cart go pravime so if(!$user->is_logged()){
+    header('Location: login.php');
+    exit();
+}
+standard , e sea dokolku toj e najaven kreirame si objekt so ime cart standard raboti , kade sto 
+ke imame funkcija get_cart_items i istata ke ja kreirame vo klasata Cart , a taa ke ni sluzi za 
+zimanje na itemi za cart samo za onoj user koj e najaven znaci mora da mu go zememe negoviot session id.
+OBJASNUVANJE NA INNER JOIN : Zosto imame INNER JOIN , pa imame zatoa sto spojuvame dve tabeli zatoa sto
+imame products i imame cart , imame pisuvano p.product_id c.product_id , toa ni oznacuva deka p e za product
+a c za cart . 
+TOLKU ZA INNER JOIN !
+
+25)
+Se vrakjame u cart.php kade sto ke ni treba eden foreach za da gi ispecatime tie vrednosti , kade so 
+pomos na tabela ke gi ispecatime tie , podobar izgled .Sega bidejki imame dugme Checkout istoto ke go i napravime
+znaci checkout.php ke ni se vika taa skripta koja sto na pocetokot vednas ke gi iskopirame pocetnite informacii od cart.php
+a toa se prviot php i posledniot(footer) i potoa megju niv go pisuvame ostanatiot kod 
+OSTANATIOT KOD : Ke kreirame edna forma so koj sto samiot toj ke popunuva padatoci za toa kade istoto ke se isprakja , 
+vo ovoj tutorial ne pravime so payment (cysecor vika deka neso so stripe mozelo preku php a za onaka trebalo neso so banka 
+da se prae tam neso nebitno sea toa u vaj moment) Otkako ke ja napravime formata so html kodot .
+
+26)
+Sea koa ke klikne na dugmeto Order ke treba toa da se dodade vo My Orders a Cart da mu se isciste , za toa ke ni bide potrebno
+nova clasa Order , nabrzinski ja pravime i gi dodavame standradno site raboti koj sto sodrzi edna klasa u pocetokot vo nasiot 
+slucaj i se vrakjame vo checkout.php kade sto posle card_items ke napiseme if($_SERVER['REQUEST_METHOD'] =="POST"){
+    $order = new Order();
+    $order = $order->create($cart_items);
+    if($order){
+}} 
+NOOOO EDNO NESO DRUGO SEA KE NAPRAVIME ZA DA IMAME POMALKU KOD TUKA I PODBRA STRUKTURA NA SAMIOT KOD:
+Znaci sea $cart = new Cart();
+$cart_items = $cart->get_cart_items(); gi briseme i sea odime vo Order.php klasata i pisuvame extends Cart
+na klasata Order znaci bi imale class Order extends Cart i sea mozeme direktno da napiseme $this->get_cart_items
+znaci site funkcii koj se public od Cart.php mozat da se povikat u Order.php
+
+27)
+Sea doagja malku pokompleksen del znaci koga korisnikot napravi order i on moze da ima primer 5 proizvodi a eden 
+korisnik moze da ima znaci povekje orderi a eden order moze da ima povekje proizvodi . Toa znaci deka ako eden
+order moze da ima povekje proizvodi u nega nie morame da napravime dve tabeli .Edna tabela za orders a druga tabela
+za order_items. Poso sekoj order treba da ima order_items . Ajde sea da gi napravime , ova e malku komplicirano . 
+Prvin pravime orders tabela koja sto ke ima order_id , user_id(koj korisnik go napravil ovoj order) , a sea specificno 
+za sekoj order ima svoj delivery_address znaci eden korisnik moze da napravi order so delivery_address i istiot taj korisnik
+moze da napravi order so drug delivery_address znaci dostava na adresa moze samiot korisnik da ja menuva(primer sekoj pat pisuva 
+nova adresa primer samo e ova) i created_at . Sea ni treba : poso eden order moze da ima povekje order itemi t.e povekje proizvodi 
+treba ni use edna tabela koja ke se vika order_items i ona treba da sodrzi order_items_id, order_id , product_id i moze da bide specificno a toa quantity
+poso sekoj proizvod moze da naraca 5 maici na primer , i na kraj ke ni treba quantity vo tabelata a ovde created_at nema da ni treba
+poso ova nema nikade da go prikazuvame.
+
+28)
+Sea poso imame i quantity a toa go nemame dodadeno u product i tamu ke go vmetneme u html kodot , a toa quantity go dodavame i malku pogore u cart->add_to_cart($product_id , $user_id, $quantity);
+sea u klasata Cart.php go dadavame isto , so znaci deka i ovaa tabela kaj so pravime INSERT INTO cart ke treba da go dodademe quantity. Sea u bazata cart odeme da go kreirame quantity potocno da go 
+dodademe poso go nema . Go dodavame i vo cart.php u tabelata th poso go nemame od prethodno , sledno c.quantity go dodavame i vo klasata Card vo Select delot 
+$quantity =$_POST['quantity']; mora da go dodademe u product.php za da nemame greski vo kodot.
+
+29)
+Sega odeme u klasata Order.php kade sto vo funkcijata create() ke mozeme da pisuvame kod no najprvin treba vo create da vmetneme $delivery_address istata u checkout.php vo $order = $order->create($delivery_address)
+ja dodavame . Taa adresa e adresa od formata checkout , no gledame deka tamu imame nekolku polinja koi sto ke treba da gi spoime i site tie polinja ke gi spoime so ovoj kod :
+$delivery_address = $_POST['country'] . ", " . $_POST['city'] . " , " . $_POST['zip'] . " , " . $_POST['address'];
+Proveruvame so var_dump($delivery_address); da videme dali ke ni raboti ovoj kod . Gledame deka raboti i sea sleden cekor .
+
+30)
+Vo create funkcijata sea pisuvame sql i php kod za se ova da se napise u samata baza , znaci mora da se napise u orders i order_items.
+Vo tabelata orders ke gi dodademe user_id i delivery_address(koj user go napravil i na koja adresa treba da se dostavi pratkata).
+Vo bind_param od sessijata zimame koj e user_id (momentalniot najaven) i delivery_address i toa se izvrse i toa e toa.
+Sea treba da zememe order_id koj sme go kreirale a toa go pravime so $order_id = $this->conn->insert_id; i zimame go ova $cart_items = $this->get_cart_items();
+Sea pisuvame sql query i potoa so foreach so bind_param pravime dodavanje
+
+31)
+Sea sledno treba da ocisteme cart toa znaci koa neso vekje naraceme toa treba da se trgne i treba da napiseme poraka deka uspesno sme poracale i da izlistame My Orders .
+Prvin ja pravime porakata za poracka so REQYEST_METHOD vo checkout.php , voedno go prosleduvame u orders.php kade sto sea ke go kreirame toj dokument , kade sto na taa strana
+ke gi prikazuvame listata na orderi a toa kje go napravime taka sto treba da ja vcitame order klasata najprvin , potoa da proverime dali korisnikot e najaven ili ne e , sledno ja zimame
+sesijata na momentalniot najaven korisnik , potoa kreirame objekt od klasata Order i preku order klasata ja vcituvame funkcijata get_orders koja sto sega ke ja kreirame vo klasata Order .
+$user_id =$_SESSION['user_id']; go dodadovme u funkcijata mesto vo orders.php mala promena . I sea treba da gi vratime orderite , no ova malku e komplicirano zatoa sto vo igra imame 3 tabeli
+orders tabelata , order_items tabelata i products tabelata znaci za nie da gi ispiseme orderite morame da gi ispiseme i tie proizvodite koi sto go zanima korisnikot da gi vidi , bidejki korisnikot
+ne ga zanima da ga vide order_items i negovio id ili takvo nesto , znaci moramo da gi napiseme iminjata na proizvodite zatoa mora da vlezeme u orders tabelata da videme koj se tuka orderi i 
+od tie tabeli da ideme u order_items da gi povrzeme orders i order_items da videmo so se tuka poklopuva i posle od order_items da zememe product_id i da iscitamo od products tabelata koj se proizvodite
+znaci ULTRA komplicirano i sea ke napiseme query za toa i toa go pravime u sleden cekor 
+
+32)
+Sega otkako go napisavme kompliciraniot sql izras so spojuvanje na trite tabeli 
+sledno e da gi ispecatime istite . Znaci vaka sql upito ni se sostoe od : 
+Prvo selektirame so ni treba , pa so from od koja tabela pa sea doagja na red INNER JOIN order_items i INNER JOIN products toa znaci deka ovie tri tabeli gi spojuvame zaedno da bidat.
+Znaci order_items se spojuva na orders preku order_id . Products se spojuva na order_items preku product_id i vo WHERE delot stavame da bide samo korisnikot koj sto go kreiral toj order
+
+33)
+Sega ke napiseme ciklus za da gi ispecatime vo orders.php toa ke go napravime u nekoja tabela , standardno kako so pecatevme i za site drugi.
+No ovde ke treba i da ja vcitame klasata Cart bidejki ni treba inaku ke javuva greska nema da raboti onoj kod napisan so foreach ciklusot.
+
+34)
+Sea sledno koa vekje naracame se od cart da se izbrise potocno da ostane toa prazno , toa kje go napravime u create funkcijata 
+znaci koa sme kreirale kje treba i da ja unistime na krajot a toa ke bide najnakraj od funkcijata create($delivery_address) .
+Sea taa funkcija treba da ja kreirame i istata ke ja napiseme u Cart.php
+
+35)
+Funkcijata destroy_cart() treba da se sostoi od sql izraz isto taka sto ke ja koristime komandata DELETE slicno kako i prethodno .
+ovoa ne e tesko . KODOT ZA BRISENJE :
+$stmt = $this->conn->prepare("DELETE FROM cart WHERE user_id = ?");
+        $stmt->bind_param("i",$_SESSION['user_id']);
+        $stmt->execute();
+
+36)
+Sega ostanuva da zavrsime admin delot , prvin ke registrirame nekoj admin primer user="admin" password="admin123" ovie ni se informaciite za toj korisnik , sea u bazata 
+kaj so ni pisuva is_admin ke mu staveme vrednost 1 za tuka vo bazata ni bide admin , noo toj e samo tuka admin sea treba da napiseme funkcionalen kod za nego , a toa kje 
+go napravime vo folderot admin i skripta index.php . Najprvin ke kreirame edna funkcija vo klasata User.php koja ke ni se vika is_admin() kade sto kje cekirame dali userot 
+koj sto e najaven e admin , toa go pravime so sql taka sto gi zimame podatocite od bazata za userot i proveruvame . Otkako ke go napiseme tamu kodot sledno e vo folderot admin vo index.php
+da kreirame objekt od User i da napravime proverka so toa sto dali prvin korisnikot e najaven i dali istitot korisnik koj sto e najaven e i admin . 
+
+37)
+Sega mozeme da gi fetchujemo(fetch) site raboti , produkti i da napravime tabela so site produkti i da gi ispiseme . Vcituvame prvin html kodot(boostrap standard) i sea u div 
+class="container" ke gu dodademe tabelata za koj so ke gi ispiseme proizvodite . Sea ke gu kreirame tabelata , pisuvame so foreach site proizvodi i toa so sakame da ni se ispecati . 
+Imame dva buttoni za edit i delete , koi so sea ke gi kreirame a istite ni se vikat edit_product.php i delete_product.php
+
+38)
+Kreirame gi vo folderot admin i sea pred da gu pisuvamo nivnata logika ke treba vo klasata Product.php da kreirame nova funkcija update() koja ke ni bide za edit i use edna funkcija
+delete() koja so ke ni bide za brisenje na produkti i ke ni treba edna funkcija za kreiranje produkti koja ke ni se vika add_product.php kaj so prethodno imame kreirano vo index.php vo folderot admin
+na pocetokot na div klasata . Sega kreiranite funkcii create update read i delete so vika CRUD . Skoro sekoja klasa gi ima ovie cetiri funkcii za bilo so primer vraboteni , produkti i slicno .
+
+39)
+Sega pisuvame kodot za funkcijata create , pa za update i za delete na krajot . E sea site ovie funkcii koi so gi imamo napraveno treba da gi povikame nekade , prvin ke napravime za delete
+a nea ke ja povikame u delete_product.php sea ke go napiseme kodot tamu za brisenje na product . I so toa ni e zavrseno delete .
+
+40)
+Sea kodot za funkcijata edit , koga se editira tamu treba da imame kreirano i forma poso normalno za da kreiras nov product ke treba da imas polinja za da go vneses
+Otkako go napisavme html kodot sea treba polinjata da gi prezememe a toa ke go napravime so request_method standard 
+ZADACA ZA SAMI OVOJ HTML KOD DA GO SREDIME I KOGA KJE KLIKNEME NA UPDATE PRODUCT DA NI ISPECATI PORAKA DEKA USPESNO SME NAPRAVILE UPDATE
+
+41)
+Sea za add_product.php ke go pisuvame , pravime forma i tuka go pravime dropzone za upload na slika , sea u dropzone imame url : upload_photo.png
+so znaci deka treba da kreirame nova php skripta so toa ime u admin foldero , sea vo upload_photo.pgg go pisuvame kodot za upload sliki koj sto e ist so kodot od terena bukvalno samo go kopiravme
+od tamu poso za dropzone i ova kodot e toj nema drug.
+
+42)
+Sea u add_product.php pisuvame kod za da gi prezememe informaciite koj sto sme gi vnele toa go pravime so request_method , lesno e ovoa 
+
+43)
+Za slikata ni se prikaze i vo product.php na google treba u taa skripta kaj so imame img srw prvin da napiseme images/pa php skriptata za da ni gu izvade slikata od toj proizvod
+
+
+
+
+DA SE PRODOLZI OD 2:11:05
+https://www.youtube.com/watch?v=5dJRAVOcTCE
+
