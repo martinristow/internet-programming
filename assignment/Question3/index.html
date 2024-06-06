@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old MacDonald's Farm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Old MacDonald's Farm</h1>
+        <form action="animals.php" method="post">
+            <div id="animal-sound-pairs">
+                <div class="pair">
+                    <label for="animal1">Animal 1:</label>
+                    <input type="text" id="animal1" name="animals[]" required>
+                    <label for="sound1">Sound 1:</label>
+                    <input type="text" id="sound1" name="sounds[]" required>
+                </div>
+            </div>
+            <button type="button" class="add-btn" onclick="addAnimalSoundPair()">Add Another Animal</button>
+            <br><br>
+            <button type="submit" class="submit-btn">Generate Verses</button>
+        </form>
+    </div>
+
+    <script>
+        function addAnimalSoundPair() {
+            const container = document.getElementById('animal-sound-pairs');
+            const index = container.children.length + 1;
+            const div = document.createElement('div');
+            div.className = 'pair';
+            div.innerHTML = `
+                <label for="animal${index}">Animal ${index}:</label>
+                <input type="text" id="animal${index}" name="animals[]" required>
+                <label for="sound${index}">Sound ${index}:</label>
+                <input type="text" id="sound${index}" name="sounds[]" required>
+            `;
+            container.appendChild(div);
+        }
+    </script>
+</body>
+</html>
